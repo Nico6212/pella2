@@ -70,5 +70,5 @@ export default defineConfig([
     },
   },
 ])
-```
+```Test commit depuis VS Code
 # pella2
