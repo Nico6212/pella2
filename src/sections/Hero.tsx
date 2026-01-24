@@ -3,7 +3,16 @@ import { motion } from 'motion/react';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-32 pb-20">
-      {/* Background Elements */}
+      {/* Fixed Background Image */}
+      <div
+        className="fixed inset-0 -z-20 bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/hero%20evenement%20image%20de%20font%20.png)',
+          backgroundPosition: 'center 30%'
+        }}
+      />
+
+      {/* Background Overlay & Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 right-[10%] h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
         <div className="absolute bottom-20 left-[10%] h-96 w-96 rounded-full bg-sage/10 blur-3xl" />
