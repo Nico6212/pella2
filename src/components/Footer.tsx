@@ -1,30 +1,56 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
+import { useSectionData } from '../hooks/useSectionData';
+import type { FooterContent } from '../types/content';
 
-const footerLinks = {
-  services: [
-    { name: 'Événements Corporate', href: '#services' },
-    { name: 'Mariages', href: '#services' },
-    { name: 'Célébrations Privées', href: '#services' },
-    { name: 'Expériences Luxe', href: '#services' },
+const fallbackData: FooterContent = {
+  tagline: "Créateurs d'expériences inoubliables, nous donnons vie à votre vision avec créativité, précision et passion.",
+  newsletter: {
+    title: 'Restez inspiré',
+    placeholder: 'Votre email',
+    buttonText: "S'inscrire",
+  },
+  linkColumns: [
+    {
+      title: 'services',
+      links: [
+        { name: 'Événements Corporate', href: '#services' },
+        { name: 'Mariages', href: '#services' },
+        { name: 'Célébrations Privées', href: '#services' },
+        { name: 'Expériences Luxe', href: '#services' },
+      ],
+    },
+    {
+      title: 'entreprise',
+      links: [
+        { name: 'À propos', href: '#about' },
+        { name: 'Réalisations', href: '#portfolio' },
+        { name: 'Témoignages', href: '#' },
+        { name: 'Blog', href: '#' },
+      ],
+    },
+    {
+      title: 'support',
+      links: [
+        { name: 'Contact', href: '#contact' },
+        { name: 'FAQ', href: '#' },
+        { name: 'Confidentialité', href: '#' },
+        { name: 'Mentions légales', href: '#' },
+      ],
+    },
   ],
-  entreprise: [
-    { name: 'À propos', href: '#about' },
-    { name: 'Réalisations', href: '#portfolio' },
-    { name: 'Témoignages', href: '#' },
-    { name: 'Blog', href: '#' },
-  ],
-  support: [
-    { name: 'Contact', href: '#contact' },
-    { name: 'FAQ', href: '#' },
-    { name: 'Confidentialité', href: '#' },
-    { name: 'Mentions légales', href: '#' },
+  socialLinks: [
+    { name: 'Instagram', letter: 'In', url: '#' },
+    { name: 'Pinterest', letter: 'Pi', url: '#' },
+    { name: 'LinkedIn', letter: 'Li', url: '#' },
+    { name: 'Twitter', letter: 'X', url: '#' },
   ],
 };
 
 export default function Footer() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const { data } = useSectionData<FooterContent>('footer', fallbackData);
 
   return (
     <footer className="bg-cream-dark py-16 px-6" ref={ref}>
@@ -38,42 +64,41 @@ export default function Footer() {
             className="lg:col-span-2"
           >
             <a href="#" className="font-display text-2xl font-semibold tracking-tight text-charcoal">
-              Pella<span className="text-gold">.</span>
+              Pela<span className="text-gold">.</span>
             </a>
             <p className="mt-4 max-w-sm text-taupe leading-relaxed">
-              Créateurs d'expériences inoubliables, nous donnons vie à votre vision avec créativité,
-              précision et passion.
+              {data.tagline}
             </p>
 
             {/* Newsletter */}
             <div className="mt-8">
-              <p className="text-sm font-medium text-charcoal mb-3">Restez inspiré</p>
+              <p className="text-sm font-medium text-charcoal mb-3">{data.newsletter.title}</p>
               <div className="flex gap-2">
                 <input
                   type="email"
-                  placeholder="Votre email"
+                  placeholder={data.newsletter.placeholder}
                   className="flex-1 rounded-full bg-cream border border-taupe/20 px-4 py-2.5 text-sm text-charcoal placeholder:text-taupe/50 focus:outline-none focus:border-gold/50"
                 />
                 <button className="rounded-full bg-charcoal px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-charcoal-light">
-                  S'inscrire
+                  {data.newsletter.buttonText}
                 </button>
               </div>
             </div>
           </motion.div>
 
           {/* Links Columns */}
-          {Object.entries(footerLinks).map(([title, links], colIndex) => (
+          {data.linkColumns.map((column, colIndex) => (
             <motion.div
-              key={title}
+              key={column.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * (colIndex + 1) }}
             >
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-charcoal mb-4">
-                {title}
+                {column.title}
               </h4>
               <ul className="space-y-3">
-                {links.map((link) => (
+                {column.links.map((link) => (
                   <li key={link.name}>
                     <a
                       href={link.href}
@@ -96,20 +121,15 @@ export default function Footer() {
           className="mt-16 pt-8 border-t border-taupe/10 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-sm text-taupe">
-            &copy; {new Date().getFullYear()} Pella Events. Tous droits réservés.
+            &copy; {new Date().getFullYear()} Pela Events. Tous droits réservés.
           </p>
 
           {/* Social Links */}
           <div className="flex items-center gap-4">
-            {[
-              { name: 'Instagram', letter: 'In' },
-              { name: 'Pinterest', letter: 'Pi' },
-              { name: 'LinkedIn', letter: 'Li' },
-              { name: 'Twitter', letter: 'X' },
-            ].map((social) => (
+            {data.socialLinks.map((social) => (
               <a
                 key={social.name}
-                href="#"
+                href={social.url}
                 className="h-9 w-9 rounded-full border border-taupe/20 flex items-center justify-center text-taupe transition-all hover:bg-charcoal hover:text-cream hover:border-charcoal"
                 aria-label={social.name}
               >

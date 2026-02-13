@@ -1,5 +1,33 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useState, type FormEvent } from 'react';
+import { useSectionData } from '../hooks/useSectionData';
+import type { ContactContent } from '../types/content';
+
+const fallbackData: ContactContent = {
+  label: 'Contactez-nous',
+  title: 'Créons ensemble quelque chose de magnifique',
+  description: "Prêt à donner vie à votre vision ? Nous serions ravis d'en savoir plus sur votre prochain événement et d'explorer comment le rendre inoubliable.",
+  contactItems: [
+    { iconPath: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', label: 'Email', value: 'bonjour@pella.events' },
+    { iconPath: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z', label: 'Téléphone', value: '+33 1 23 45 67 89' },
+    { iconPath: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', label: 'Adresse', value: 'Paris, France' },
+  ],
+  socialLinks: [
+    { name: 'Instagram', url: '#' },
+    { name: 'Pinterest', url: '#' },
+    { name: 'LinkedIn', url: '#' },
+  ],
+  formConfig: {
+    eventTypes: [
+      { value: 'wedding', label: 'Mariage' },
+      { value: 'corporate', label: 'Événement corporate' },
+      { value: 'private', label: 'Célébration privée' },
+      { value: 'luxury', label: 'Expérience luxe' },
+    ],
+    submitButtonText: 'Envoyer ma demande',
+    responseText: 'Nous vous répondrons sous 24 heures pour discuter de votre événement',
+  },
+};
 
 export default function Contact() {
   const ref = useRef(null);
@@ -11,6 +39,7 @@ export default function Contact() {
     date: '',
     message: '',
   });
+  const { data } = useSectionData<ContactContent>('contact', fallbackData);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,24 +56,19 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="text-sm font-medium text-gold uppercase tracking-widest">Contactez-nous</span>
+            <span className="text-sm font-medium text-gold uppercase tracking-widest">{data.label}</span>
 
             <h2 className="mt-4 font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-cream">
-              Créons ensemble quelque chose de magnifique
+              {data.title}
             </h2>
 
             <p className="mt-6 text-lg text-cream/70 leading-relaxed">
-              Prêt à donner vie à votre vision ? Nous serions ravis d'en savoir plus sur votre
-              prochain événement et d'explorer comment le rendre inoubliable.
+              {data.description}
             </p>
 
             {/* Contact Info */}
             <div className="mt-12 space-y-6">
-              {[
-                { icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', label: 'Email', value: 'bonjour@pella.events' },
-                { icon: 'M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z', label: 'Téléphone', value: '+33 1 23 45 67 89' },
-                { icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', label: 'Adresse', value: 'Paris, France' },
-              ].map((item, index) => (
+              {data.contactItems.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -54,7 +78,7 @@ export default function Contact() {
                 >
                   <div className="h-12 w-12 rounded-full bg-cream/10 flex items-center justify-center">
                     <svg className="h-5 w-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.iconPath} />
                     </svg>
                   </div>
                   <div>
@@ -74,14 +98,14 @@ export default function Contact() {
             >
               <div className="text-sm text-cream/50 mb-4">Suivez-nous</div>
               <div className="flex gap-4">
-                {['Instagram', 'Pinterest', 'LinkedIn'].map((social) => (
+                {data.socialLinks.map((social) => (
                   <a
-                    key={social}
-                    href="#"
+                    key={social.name}
+                    href={social.url}
                     className="h-10 w-10 rounded-full border border-cream/20 flex items-center justify-center text-cream/70 transition-all hover:bg-cream/10 hover:text-cream hover:border-cream/40"
                   >
-                    <span className="sr-only">{social}</span>
-                    <span className="text-xs font-medium">{social[0]}</span>
+                    <span className="sr-only">{social.name}</span>
+                    <span className="text-xs font-medium">{social.name[0]}</span>
                   </a>
                 ))}
               </div>
@@ -130,10 +154,11 @@ export default function Contact() {
                     required
                   >
                     <option value="" className="bg-charcoal">Sélectionner un type</option>
-                    <option value="wedding" className="bg-charcoal">Mariage</option>
-                    <option value="corporate" className="bg-charcoal">Événement corporate</option>
-                    <option value="private" className="bg-charcoal">Célébration privée</option>
-                    <option value="luxury" className="bg-charcoal">Expérience luxe</option>
+                    {data.formConfig.eventTypes.map((eventType) => (
+                      <option key={eventType.value} value={eventType.value} className="bg-charcoal">
+                        {eventType.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -163,11 +188,11 @@ export default function Contact() {
                 type="submit"
                 className="w-full rounded-full bg-gold px-8 py-4 font-medium text-charcoal transition-all hover:bg-gold-light hover:shadow-xl hover:shadow-gold/20"
               >
-                Envoyer ma demande
+                {data.formConfig.submitButtonText}
               </button>
 
               <p className="text-center text-sm text-cream/40">
-                Nous vous répondrons sous 24 heures pour discuter de votre événement
+                {data.formConfig.responseText}
               </p>
             </form>
           </motion.div>

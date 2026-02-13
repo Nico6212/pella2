@@ -1,15 +1,23 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useSectionData } from '../hooks/useSectionData';
+import type { NavbarContent } from '../types/content';
 
-const navLinks = [
-  { name: 'À propos', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Réalisations', href: '#portfolio' },
-  { name: 'Contact', href: '#contact' },
-];
+const fallbackData: NavbarContent = {
+  logoImage: '/mariage pela/logo2 élégant .png',
+  links: [
+    { name: 'À propos', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Réalisations', href: '#portfolio' },
+    { name: 'Contact', href: '#contact' },
+  ],
+  ctaText: 'Réserver un appel',
+  ctaHref: '#contact',
+};
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data } = useSectionData<NavbarContent>('navbar', fallbackData);
 
   return (
     <motion.nav
@@ -21,13 +29,17 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center justify-between rounded-full bg-cream/80 px-6 py-3 backdrop-blur-md border border-taupe/10">
           {/* Logo */}
-          <a href="#" className="font-display text-xl font-semibold tracking-tight text-charcoal">
-            Pella<span className="text-gold">.</span>
+          <a href="#" className="flex items-center">
+            <img
+              src={data.logoImage}
+              alt="Pela"
+              className="h-16 w-auto rounded-lg"
+            />
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {data.links.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -37,10 +49,10 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href={data.ctaHref}
               className="rounded-full bg-charcoal px-5 py-2 text-sm font-medium text-cream transition-all hover:bg-charcoal-light"
             >
-              Réserver un appel
+              {data.ctaText}
             </a>
           </div>
 
@@ -77,7 +89,7 @@ export default function Navbar() {
             className="absolute top-full left-6 right-6 mt-2 rounded-2xl bg-cream/95 p-6 backdrop-blur-md border border-taupe/10 md:hidden"
           >
             <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {data.links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -88,11 +100,11 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href={data.ctaHref}
                 onClick={() => setIsOpen(false)}
                 className="mt-2 rounded-full bg-charcoal px-5 py-3 text-center text-sm font-medium text-cream"
               >
-                Réserver un appel
+                {data.ctaText}
               </a>
             </div>
           </motion.div>
