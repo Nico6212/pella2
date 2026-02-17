@@ -1,13 +1,25 @@
+import { useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const corporatePhotos: { id: number; src: string; alt: string }[] = [
   // Ajoute tes photos ici
 ];
 
 export default function CorporateGallery() {
+  const navigate = useNavigate();
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen">
+      <div
+        className="fixed inset-0 -z-20 bg-cover bg-no-repeat grayscale"
+        style={{
+          backgroundImage: `url('/bg-corporate.jpg')`,
+          backgroundPosition: 'center 30%',
+        }}
+      />
+      <div className="fixed inset-0 -z-10 bg-cream/75" />
+
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,9 +50,56 @@ export default function CorporateGallery() {
             <h2 className="mt-4 font-display text-4xl md:text-5xl font-semibold text-charcoal">
               Événements Corporate
             </h2>
-            <p className="mt-4 text-lg text-taupe max-w-2xl mx-auto">
-              Découvrez nos événements corporate, des expériences impactantes pour votre marque.
+            <p className="mt-4 text-lg text-taupe max-w-2xl mx-auto italic">
+              Vivez l'instant. Créez l'impact. Marquez les esprits.
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="max-w-3xl mx-auto mb-16 space-y-6 text-charcoal text-lg leading-relaxed"
+          >
+            <p>
+              Chaque événement est une scène, chaque moment une opportunité.
+            </p>
+            <p>
+              Nous concevons des expériences corporate qui vont bien au-delà du simple rassemblement : elles incarnent votre vision, valorisent votre marque et créent une connexion durable avec votre audience.
+            </p>
+            <p>
+              Des lancements de produits audacieux aux galas prestigieux, en passant par des séminaires inspirants et des team buildings fédérateurs, nous transformons vos idées en événements mémorables.
+            </p>
+            <p>
+              Notre approche allie créativité, rigueur logistique et technologie immersive pour offrir des formats sur mesure, adaptés à vos enjeux et à vos ambitions.
+            </p>
+
+            <div className="space-y-3 py-4">
+              <p className="flex items-start gap-3">
+                <span className="text-gold text-xl leading-none">🎯</span>
+                <span><strong className="text-charcoal">Objectif :</strong> captiver, fédérer, valoriser.</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <span className="text-gold text-xl leading-none">🎤</span>
+                <span><strong className="text-charcoal">Moyens :</strong> scénographie moderne, storytelling visuel, interactions engageantes.</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <span className="text-gold text-xl leading-none">🌐</span>
+                <span><strong className="text-charcoal">Résultat :</strong> une expérience qui résonne bien au-delà du jour J.</span>
+              </p>
+            </div>
+
+            <button
+              onClick={() => {
+                navigate('/');
+                setTimeout(() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+              }}
+              className="inline-block text-charcoal font-medium hover:text-gold transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              → Découvrez comment nos événements corporate peuvent transformer votre communication en expérience vivante.
+            </button>
           </motion.div>
 
           {corporatePhotos.length > 0 ? (
@@ -61,9 +120,7 @@ export default function CorporateGallery() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <p className="text-taupe text-lg">Photos bientôt disponibles...</p>
-            </div>
+            <div />
           )}
         </div>
       </main>

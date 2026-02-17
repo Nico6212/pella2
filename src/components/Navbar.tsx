@@ -4,7 +4,7 @@ import { useSectionData } from '../hooks/useSectionData';
 import type { NavbarContent } from '../types/content';
 
 const fallbackData: NavbarContent = {
-  logoImage: '/mariage pela/logo2 élégant .png',
+  logoImage: '/logo-reinza.png',
   links: [
     { name: 'À propos', href: '#about' },
     { name: 'Services', href: '#services' },
@@ -32,8 +32,8 @@ export default function Navbar() {
           <a href="#" className="flex items-center">
             <img
               src={data.logoImage}
-              alt="Pela"
-              className="h-16 w-auto rounded-lg"
+              alt="REINZA EVENT"
+              className="h-24 w-auto rounded-lg"
             />
           </a>
 

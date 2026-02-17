@@ -24,7 +24,7 @@ export default function AdminSidebar() {
   return (
     <aside className="w-64 bg-gray-900 text-white min-h-screen flex flex-col">
       <div className="p-6 border-b border-gray-800">
-        <h2 className="text-lg font-bold">Pela Admin</h2>
+        <h2 className="text-lg font-bold">REINZA EVENT Admin</h2>
         <a href="/" className="text-xs text-gray-400 hover:text-white transition-colors">
           ← Voir le site
         </a>

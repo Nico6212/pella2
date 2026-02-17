@@ -6,9 +6,9 @@ import type { AboutContent } from '../types/content';
 const fallback: AboutContent = {
   label: 'À propos',
   title: 'Là où la vision rencontre l\'exécution parfaite',
-  paragraph1: 'Fondée avec une passion pour créer des moments extraordinaires, Pela est devenue une agence événementielle de premier plan, reconnue pour son souci du détail et son approche innovante.',
+  paragraph1: 'Fondée avec une passion pour créer des moments extraordinaires, REINZA EVENT est devenue une agence événementielle de premier plan, reconnue pour son souci du détail et son approche innovante.',
   paragraph2: 'Notre équipe de professionnels créatifs réunit expertise en design, logistique et hospitalité pour offrir des expériences fluides qui dépassent les attentes. Du concept à la réalisation, nous gérons chaque détail avec précision et soin.',
-  image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1000',
+  image: '/about-image.jpg',
   floatingCard: { value: '12+', label: "Années d'excellence" },
   features: [
     { icon: '✦', title: 'Vision créative', description: 'Concepts uniques adaptés à votre histoire' },

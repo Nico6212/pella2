@@ -14,7 +14,7 @@ const fallback: HeroContent = {
   ctaPrimary: { text: 'Voir nos réalisations', href: '#portfolio' },
   ctaSecondary: { text: 'Planifier votre événement', href: '#contact' },
   scrollText: 'Défiler',
-  backgroundImage: '/hero%20evenement%20image%20de%20font%20.png',
+  backgroundImage: '/hero-bg.jpg',
   stats: [
     { value: '500+', label: 'Événements organisés' },
     { value: '12', label: "Années d'expérience" },

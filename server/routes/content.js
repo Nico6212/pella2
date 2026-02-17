@@ -6,7 +6,7 @@ function createContentRouter(Model) {
 
   router.get('/', async (req, res) => {
     try {
-      const data = await Model.findOne();
+      const data = await Model.findOne().maxTimeMS(3000);
       if (!data) return res.status(404).json({ message: 'Données non trouvées' });
       res.json(data);
     } catch (err) {

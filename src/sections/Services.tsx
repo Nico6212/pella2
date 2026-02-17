@@ -11,10 +11,34 @@ const fallback: ServicesContent = {
   ctaText: 'Discutons de votre événement',
   ctaHref: '#contact',
   items: [
-    { title: 'Événements Corporate', description: 'Des lancements de produits aux galas annuels, nous créons des expériences corporate impactantes qui renforcent votre marque et engagent votre audience.', image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800', features: ['Conférences & Séminaires', 'Lancements de produits', 'Team Building', 'Cérémonies de remise de prix'], linkTo: '/evenements-corporate' },
-    { title: 'Mariages', description: "Votre histoire d'amour mérite une célébration aussi unique que vous. Nous créons des mariages personnalisés qui reflètent votre parcours ensemble.", image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800', features: ['Mariages destination', 'Cérémonies intimistes', 'Grandes célébrations', 'Organisation complète'], linkTo: '/mariage-pela' },
-    { title: 'Célébrations Privées', description: 'Anniversaires, fêtes et moments importants transformés en célébrations inoubliables pour vous et vos proches.', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=800', features: ["Fêtes d'anniversaire", 'Anniversaires de mariage', 'Baby Showers', 'Remises de diplômes'], linkTo: '/celebration-vintage' },
-    { title: 'Expériences Luxe', description: "Événements exclusifs haut de gamme conçus pour des clients exigeants qui n'attendent rien de moins que la perfection.", image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=800', features: ['Événements VIP', 'Dîners privés', 'Soirées sur yacht', 'Réceptions exclusives'], linkTo: '/experiences-luxe' },
+    {
+      title: 'Événements Corporate',
+      description: 'Des lancements de produits aux galas annuels, nous créons des expériences corporate impactantes qui renforcent votre marque et engagent votre audience.',
+      image: '/services-corporate.jpg',
+      features: ['Conférences & Séminaires', 'Lancements de produits', 'Team Building', 'Cérémonies de remise de prix'],
+      linkTo: '/evenements-corporate',
+    },
+    {
+      title: 'Mariages',
+      description: "Votre histoire d'amour mérite une célébration aussi unique que vous. Nous créons des mariages personnalisés qui reflètent votre parcours ensemble.",
+      image: '/services-mariages.jpg',
+      features: ['Mariages destination', 'Cérémonies intimistes', 'Grandes célébrations', 'Organisation complète'],
+      linkTo: '/mariage-pela',
+    },
+    {
+      title: 'Célébration Vintage',
+      description: 'Anniversaires, fêtes et moments importants transformés en célébrations inoubliables pour vous et vos proches.',
+      image: '/services-celebration.jpg',
+      features: ["Fêtes d'anniversaire", 'Anniversaires de mariage', 'Baby Showers', 'Remises de diplômes'],
+      linkTo: '/celebration-vintage',
+    },
+    {
+      title: 'Expériences Luxe',
+      description: "Événements exclusifs haut de gamme conçus pour des clients exigeants qui n'attendent rien de moins que la perfection.",
+      image: '/services-luxe.jpg',
+      features: ['Événements VIP', 'Dîners privés', 'Soirées sur yacht', 'Réceptions exclusives'],
+      linkTo: '/experiences-luxe',
+    },
   ],
 };
 

@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3001;
 connectDB();
 
 app.use(cors({
-  origin: 'http://127.0.0.1:5173',
+  origin: true,
   credentials: true,
 }));
 app.use(express.json());
@@ -36,6 +36,6 @@ app.use('/api/contact', createContentRouter(Contact));
 app.use('/api/footer', createContentRouter(Footer));
 app.use('/api/navbar', createContentRouter(Navbar));
 
-app.listen(PORT, '127.0.0.1', () => {
-  console.log(`Server running on http://127.0.0.1:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });

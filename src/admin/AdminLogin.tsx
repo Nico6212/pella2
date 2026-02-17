@@ -29,7 +29,7 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Admin Pela</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Admin REINZA EVENT</h1>
           <p className="mt-2 text-sm text-gray-500">Connectez-vous pour gérer le contenu</p>
         </div>
 

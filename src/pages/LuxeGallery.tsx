@@ -1,13 +1,25 @@
+import { useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const luxePhotos: { id: number; src: string; alt: string }[] = [
   // Ajoute tes photos ici
 ];
 
 export default function LuxeGallery() {
+  const navigate = useNavigate();
+  useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen">
+      <div
+        className="fixed inset-0 -z-20 bg-cover bg-no-repeat"
+        style={{
+          backgroundImage: `url('/bg-luxe.jpg')`,
+          backgroundPosition: 'center 30%',
+        }}
+      />
+      <div className="fixed inset-0 -z-10 bg-cream/70" />
+
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,9 +50,60 @@ export default function LuxeGallery() {
             <h2 className="mt-4 font-display text-4xl md:text-5xl font-semibold text-charcoal">
               Expériences Luxe
             </h2>
-            <p className="mt-4 text-lg text-taupe max-w-2xl mx-auto">
-              Découvrez nos expériences luxe, des événements exclusifs et prestigieux.
+            <p className="mt-4 text-lg text-taupe max-w-2xl mx-auto italic">
+              L'excellence n'est pas un détail, c'est une expérience.
             </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="max-w-3xl mx-auto mb-16 space-y-6 text-charcoal text-lg leading-relaxed"
+          >
+            <p>
+              Les événements d'exception ne se contentent pas d'être beaux : ils doivent être impeccables, raffinés, orchestrés avec une précision absolue.
+            </p>
+            <p>
+              Nous créons des expériences luxe pensées pour des clients exigeants, qui recherchent bien plus qu'un événement… ils recherchent un moment rare, exclusif, façonné sur mesure.
+            </p>
+            <p>
+              Qu'il s'agisse d'un dîner privé dans un cadre prestigieux, d'une soirée VIP élégante, d'une réception exclusive, ou d'une fête sur yacht au coucher du soleil, chaque détail est imaginé pour offrir une atmosphère unique, sophistiquée et mémorable.
+            </p>
+            <p>
+              Notre approche combine esthétique haut de gamme, service irréprochable et scénographie d'exception, afin de créer des instants qui marquent durablement.
+            </p>
+
+            <div className="space-y-3 py-4">
+              <p className="flex items-start gap-3">
+                <span className="text-gold text-xl leading-none">🌟</span>
+                <span><strong className="text-charcoal">Votre vision, notre signature :</strong> élégance, discrétion, excellence.</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <span className="text-gold text-xl leading-none">🍾</span>
+                <span><strong className="text-charcoal">Votre événement, notre expertise :</strong> lieux d'exception, ambiances raffinées, prestations premium.</span>
+              </p>
+              <p className="flex items-start gap-3">
+                <span className="text-gold text-xl leading-none">✨</span>
+                <span><strong className="text-charcoal">Votre moment, notre engagement :</strong> offrir une expérience qui dépasse toutes les attentes.</span>
+              </p>
+            </div>
+
+            <p>
+              Du premier concept à la dernière lueur de la soirée, nous orchestrons chaque élément avec une attention minutieuse, pour que vous puissiez vivre un moment rare, entouré de vos invités, dans un univers où tout respire le luxe et la perfection.
+            </p>
+
+            <button
+              onClick={() => {
+                navigate('/');
+                setTimeout(() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+              }}
+              className="inline-block text-charcoal font-medium hover:text-gold transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              → Découvrez comment nous transformons vos événements haut de gamme en expériences inoubliables.
+            </button>
           </motion.div>
 
           {luxePhotos.length > 0 ? (
@@ -61,9 +124,7 @@ export default function LuxeGallery() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <p className="text-taupe text-lg">Photos bientôt disponibles...</p>
-            </div>
+            <div />
           )}
         </div>
       </main>
